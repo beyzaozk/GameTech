@@ -10,11 +10,13 @@ public class NewBehaviourScript : MonoBehaviour, IPointerDownHandler, IBeginDrag
 
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
+    private Vector2 originalPosition;
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
+        originalPosition = rectTransform.anchoredPosition;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -41,4 +43,8 @@ public class NewBehaviourScript : MonoBehaviour, IPointerDownHandler, IBeginDrag
         Debug.Log("On Pointer Down");
     }
 
+    public void ResetPosition()
+    {
+        rectTransform.anchoredPosition = originalPosition; // Çöpü baþlangýç pozisyonuna geri koy
+    }
 }

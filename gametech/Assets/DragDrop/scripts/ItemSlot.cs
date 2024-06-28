@@ -5,12 +5,52 @@ using UnityEngine.EventSystems;
 
 public class ItemSlot : MonoBehaviour, IDropHandler
 {
+    [SerializeField] private string acceptedTag;
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("OnDrop");
-        if (eventData.pointerDrag != null )
+        GameObject droppedObject = eventData.pointerDrag;
+
+        if (droppedObject != null)
         {
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            // Çöp nesnesinin RectTransform bileþenini al
+            RectTransform droppedRectTransform = droppedObject.GetComponent<RectTransform>();
+            RectTransform slotRectTransform = GetComponent<RectTransform>();
+
+            // Çöp nesnesinin Draggable scriptini al
+            NewBehaviourScript draggable = droppedObject.GetComponent<NewBehaviourScript>();
+
+            if (droppedRectTransform != null && slotRectTransform != null && draggable != null)
+            {
+                // Çöpün tag'inin çöp kutusunun kabul edeceði tag ile eþleþip eþleþmediðini kontrol et
+                if (droppedObject.tag == acceptedTag)
+                {
+                    // Çöp doðru çöp kutusuna býrakýldý
+                    Debug.Log("Correct drop");
+                    droppedRectTransform.anchoredPosition = slotRectTransform.anchoredPosition;
+                }
+                else
+                {
+                    // Çöp yanlýþ çöp kutusuna býrakýldý
+                    Debug.Log("Incorrect drop");
+                    // Burada çöpü geri alabilir veya baþka bir iþlem yapabilirsiniz
+                    // Örneðin, çözü geri eski pozisyonuna koymak:
+                    draggable.ResetPosition();
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Missing RectTransform or Draggable component on dropped object or slot");
+            }
         }
+        else
+        {
+            Debug.LogWarning("No pointerDrag object found in event data");
+        }
+
+        //if (eventData.pointerDrag != null )
+        //{
+        //    eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+        //}
     }
 }
