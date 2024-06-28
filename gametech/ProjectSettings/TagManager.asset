@@ -6,12 +6,6 @@ TagManager:
   tags:
   - Trash
   - Ground
-<<<<<<< Updated upstream
-  - EndLevel
-  - Hazard
-  - Enemy
-=======
->>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
