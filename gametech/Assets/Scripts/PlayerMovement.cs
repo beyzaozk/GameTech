@@ -13,10 +13,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
+    private GameObject heldObject = null;
+    private Transform holdPoint;
+
+    private void Start()
+    {
+        holdPoint = new GameObject("HoldPoint").transform;
+        holdPoint.SetParent(transform);
+        holdPoint.localPosition = new Vector3(0.5f, 0, 0); // Karakterin önünde bir nokta
+    }
+
     private void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
-        
+
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
@@ -27,12 +37,29 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (heldObject == null)
+            {
+                TryPickUpObject();
+            }
+            else
+            {
+                DropObject();
+            }
+        }
+
         Flip();
     }
 
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+
+        if (heldObject != null)
+        {
+            heldObject.transform.position = holdPoint.position;
+        }
     }
 
     private bool IsGrounded()
@@ -48,6 +75,32 @@ public class PlayerMovement : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
+            holdPoint.localPosition = new Vector3(holdPoint.localPosition.x * -1f, holdPoint.localPosition.y, holdPoint.localPosition.z); // HoldPoint'i yansýt
+        }
+    }
+
+    private void TryPickUpObject()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.5f);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Trash"))
+            {
+                heldObject = collider.gameObject;
+                heldObject.GetComponent<Rigidbody2D>().isKinematic = true;
+                heldObject.transform.SetParent(holdPoint);
+                break;
+            }
+        }
+    }
+
+    private void DropObject()
+    {
+        if (heldObject != null)
+        {
+            heldObject.GetComponent<Rigidbody2D>().isKinematic = false;
+            heldObject.transform.SetParent(null);
+            heldObject = null;
         }
     }
 }

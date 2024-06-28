@@ -4,15 +4,14 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - apple
-  - banana
-  - kiwi
   - Trash
-  - TrashCan
   - Ground
+<<<<<<< Updated upstream
   - EndLevel
   - Hazard
   - Enemy
+=======
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
