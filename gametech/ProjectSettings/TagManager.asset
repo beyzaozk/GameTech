@@ -12,6 +12,7 @@ TagManager:
   - Ground
   - EndLevel
   - Hazard
+  - Enemy
   layers:
   - Default
   - TransparentFX
