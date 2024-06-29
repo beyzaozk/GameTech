@@ -12,6 +12,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource jumpAudioSource; // Zýplama sesi için
+    [SerializeField] private AudioSource transitionAudioSource; // Bölüm geçiþ sesi için
 
     private GameObject heldObject = null;
     private Transform holdPoint;
@@ -26,6 +29,10 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
+
+        animator.SetBool("isRunning", horizontal != 0);
+        animator.SetBool("isJumping", !IsGrounded() && rb.velocity.y > 0);
+        animator.SetBool("isFalling", !IsGrounded() && rb.velocity.y < 0);
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
@@ -101,6 +108,15 @@ public class PlayerMovement : MonoBehaviour
             heldObject.GetComponent<Rigidbody2D>().isKinematic = false;
             heldObject.transform.SetParent(null);
             heldObject = null;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Portal"))
+        {
+            transitionAudioSource.Play(); // Bölüm geçiþ sesini çal
+            // Bölüm geçiþ iþlemlerini burada yapýn
         }
     }
 }

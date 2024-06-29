@@ -1,26 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
-    public float health;
-    public bool dead=false;
-    // Start is called before the first frame update
-    void Start()
+    public float health = 100f;
+    public bool dead = false;
+    public float fallThreshold = -10f;
+    public Image healthBar;
+
+    private void Update()
     {
-        
+        if (transform.position.y <= fallThreshold && !dead)
+        {
+            Die();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void getDamage(float damage)
     {
-        
-    }
-
-   public void getDamage(float damage)
-    {
-        if (health - damage >= 0) {
+        if (health - damage > 0) {
             health -= damage;
         
         }
@@ -28,14 +29,26 @@ public class PlayerManager : MonoBehaviour
         {
             health = 0;
         }
+        UpdateHealthBar();
         amIdead();
     }
     void amIdead() { 
         if(health==0)
         {
             dead = true;
+            Die();
         }
 
     }
-        
+    void Die()
+    {
+        Debug.Log("Player is dead.");
+        // Burada yeniden baþlatma iþlemini gerçekleþtirin
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void UpdateHealthBar()
+    {
+        healthBar.fillAmount = health / 100f; // Health bar'ýn doluluk oranýný güncelle
+    }
 }

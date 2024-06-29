@@ -5,27 +5,15 @@ using UnityEngine;
 public class EnemeyManager : MonoBehaviour
 {
 
-    public float healtk;
+    public float health;
     public float damage;
+    bool playerCollider = false;
 
-
-    bool playerColladier=false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag== "Player"&& !playerColladier)
+        if(other.tag== "Player"&& !playerCollider)
         {
-            playerColladier = true;
+            playerCollider = true;
             other.GetComponent<PlayerManager>().getDamage(damage);
         }
         
@@ -34,7 +22,7 @@ public class EnemeyManager : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            playerColladier = false;
+            playerCollider = false;
         }
     }
 }
