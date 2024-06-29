@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private AudioSource jumpAudioSource; // Zýplama sesi için
     [SerializeField] private AudioSource transitionAudioSource; // Bölüm geçiþ sesi için
+    
 
     private GameObject heldObject = null;
     private Transform holdPoint;
@@ -56,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+
         Flip();
     }
 
@@ -76,6 +78,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Flip()
     {
+        
+        
+
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
             isFacingRight = !isFacingRight;
@@ -110,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
             heldObject = null;
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
