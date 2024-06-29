@@ -6,6 +6,13 @@ TagManager:
   tags:
   - Trash
   - Ground
+  - kiwi
+  - banana
+  - apple
+  - biyo
+  - plastic
+  - glass
+  - paper
   layers:
   - Default
   - TransparentFX

@@ -8,7 +8,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
 {
     [SerializeField] private string acceptedTag;
     private static int correctDrops = 0;
-    private static int requiredCorrectDrops = 3;
+    private static int requiredCorrectDrops = 6;
 
     public void OnDrop(PointerEventData eventData)
     {
