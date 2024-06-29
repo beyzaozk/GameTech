@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class ItemSlot : MonoBehaviour, IDropHandler
 {
     [SerializeField] private string acceptedTag;
+    private static int correctDrops = 0;
+    private static int requiredCorrectDrops = 3;
+
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("OnDrop");
@@ -28,6 +32,15 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                     // Çöp doðru çöp kutusuna býrakýldý
                     Debug.Log("Correct drop");
                     droppedRectTransform.anchoredPosition = slotRectTransform.anchoredPosition;
+
+                    // Sayaç güncelleme
+                    correctDrops++;
+                    Debug.Log("Correct drops: " + correctDrops);
+
+                    if (correctDrops >= requiredCorrectDrops)
+                    {
+                        ProceedToNextSection();
+                    }
                 }
                 else
                 {
@@ -47,10 +60,12 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         {
             Debug.LogWarning("No pointerDrag object found in event data");
         }
-
-        //if (eventData.pointerDrag != null )
-        //{
-        //    eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
-        //}
+    }
+    private void ProceedToNextSection()
+    {
+        // Burada diðer bölüme geçiþ iþlemini yapýn
+        Debug.Log("Proceeding to the next section!");
+        // Örneðin, yeni bir sahneye geçmek için:
+        SceneManager.LoadScene("Bolum2");
     }
 }
