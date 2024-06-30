@@ -3649,7 +3649,7 @@ GameObject:
   - component: {fileID: 221219688}
   - component: {fileID: 221219689}
   - component: {fileID: 221219690}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cliff 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12943,7 +12943,7 @@ GameObject:
   - component: {fileID: 765353128}
   - component: {fileID: 765353127}
   - component: {fileID: 765353126}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24110,7 +24110,7 @@ GameObject:
   - component: {fileID: 1447388579}
   - component: {fileID: 1447388578}
   - component: {fileID: 1447388577}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27801,7 +27801,7 @@ GameObject:
   - component: {fileID: 1754060674}
   - component: {fileID: 1754060673}
   - component: {fileID: 1754060672}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28832,7 +28832,7 @@ GameObject:
   - component: {fileID: 1856084377}
   - component: {fileID: 1856084376}
   - component: {fileID: 1856084375}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30383,7 +30383,7 @@ GameObject:
   - component: {fileID: 1929239792}
   - component: {fileID: 1929239793}
   - component: {fileID: 1929239794}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Box (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
