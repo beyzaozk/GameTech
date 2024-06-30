@@ -89,11 +89,11 @@ public class PlayerMovement : MonoBehaviour
     private void Flip()
     {
 
-        //if (Input.GetButtonDown("Fire1"))
-        //{
-        //    transform.Rotate(0, 180, 0);
+        if (Input.GetButtonDown("Fire1"))
+        {
+            transform.Rotate(0, 180, 0);
 
-        //}
+        }
 
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
