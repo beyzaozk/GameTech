@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     public float endTime;
     public float damage = 20f;
 
-    [SerializeField] private GameObject greenParticles;
+   // [SerializeField] private GameObject greenParticles;
 
     public GameObject Bulletimpact;
     
@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
             {
                 enemy.TakeDamage(damage);
             }
-            Instantiate(greenParticles, transform.position, transform.rotation);
+          //  Instantiate(greenParticles, transform.position, transform.rotation);
             Destroy(gameObject);
         }
 
