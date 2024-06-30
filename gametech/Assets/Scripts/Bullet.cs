@@ -8,7 +8,10 @@ public class Bullet : MonoBehaviour
     Rigidbody2D rb;
     public float bulletSpeed;
     public float endTime;
-    
+    public float damage = 20f;
+
+    [SerializeField] private GameObject greenParticles;
+
     public GameObject Bulletimpact;
     
     void Start()
@@ -22,7 +25,12 @@ public class Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            Debug.Log("can azaldý");
+            EnemeyManager enemy = collision.GetComponent<EnemeyManager>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
+            Instantiate(greenParticles, transform.position, transform.rotation);
             Destroy(gameObject);
         }
 

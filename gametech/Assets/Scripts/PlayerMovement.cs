@@ -29,18 +29,28 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
+        horizontal = 0f;
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            horizontal = -1f;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            horizontal = 1f;
+        }
 
         animator.SetBool("isRunning", horizontal != 0);
         animator.SetBool("isJumping", !IsGrounded() && rb.velocity.y > 0);
         animator.SetBool("isFalling", !IsGrounded() && rb.velocity.y < 0);
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.W) && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            if (jumpAudioSource != null) jumpAudioSource.Play();
         }
 
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        if (Input.GetKeyUp(KeyCode.W) && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
@@ -78,8 +88,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Flip()
     {
-        
-        
+
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+        //    transform.Rotate(0, 180, 0);
+
+        //}
 
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {

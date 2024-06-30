@@ -15,6 +15,7 @@ TagManager:
   - paper
   - Enemy
   - Audio
+  - Portal
   layers:
   - Default
   - TransparentFX

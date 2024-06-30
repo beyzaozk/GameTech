@@ -11,12 +11,12 @@ public class Weapon : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             Shoot();
-                
+
         }
-        
+
     }
     void Shoot()
     {
-        Instantiate(Bullet, FirePoint.position, FirePoint.rotation);
+        Instantiate(Bullet, FirePoint.position, transform.rotation);
     }
 }
